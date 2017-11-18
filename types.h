@@ -1,4 +1,7 @@
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <MLV/MLV_all.h>
+#define N 12
 
 /* types.h : l'ensemble des types utilisés dans le jeu */
 
@@ -12,10 +15,10 @@ typedef struct
 } coup;
 
 typedef enum joueur joueur;
-enum joueur {J1, J2, CPU};
+enum joueur {J1, J2};
 
 typedef enum mode mode;
-enum mode {1VS2, 1VSCPU};
+enum mode {JvsJ, JvsCPU};
 
 typedef struct
 {
