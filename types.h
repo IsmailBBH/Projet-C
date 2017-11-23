@@ -1,3 +1,6 @@
+#ifndef TYPES
+#define TYPES
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <MLV/MLV_all.h>
@@ -49,3 +52,5 @@ typedef struct
 	date dt;
 	configuration cg;
 } sauvegarde;
+
+#endif
