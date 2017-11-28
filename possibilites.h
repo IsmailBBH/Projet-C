@@ -13,7 +13,11 @@ void inserer(int *t, int m, int n, int l)
 	t[l] = n;
 }
 
-// Touts les fonctions utilisés dans la fonction poss_j1
+
+/* ---- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ---- */
+// .  . Touts les fonctions utilisés dans la fonction poss_j1 .  .
+/* ---- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ---- */
+
 
 void cas1_1(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -65,6 +69,8 @@ void cas1_1(int *mouvements, int *prises, damier d, int i, int j)
 			}
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void cas1_2(int *mouvements, int *prises, damier d, int i, int j)
 {
 	int l = 3, k = 3;
@@ -91,6 +97,8 @@ void cas1_2(int *mouvements, int *prises, damier d, int i, int j)
 				k += 2;
 			}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas1_3(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -119,6 +127,8 @@ void cas1_3(int *mouvements, int *prises, damier d, int i, int j)
 			}
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void cas1_4(int *mouvements, int *prises, damier d, int i, int j)
 {
 	int l = 3, k = 3;
@@ -136,6 +146,8 @@ void cas1_4(int *mouvements, int *prises, damier d, int i, int j)
 		}
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas3(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -313,6 +325,8 @@ void cas3(int *mouvements, int *prises, damier d, int i, int j)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int poss_j1(int *mouvements, int *prises, damier d, int i, int j)
 {
 	if (d[i][j] == 1)
@@ -341,13 +355,17 @@ int poss_j1(int *mouvements, int *prises, damier d, int i, int j)
 	{
 		cas3(mouvements, prises, d, i, j);
 	}
-	if (mouvements[0] != 0 && prises[0] != 0)
+	if (mouvements[0] != 0 || prises[0] != 0)
 		return 1;
 	else
 		return 0;
 }
 
-// Touts les fonctions utilisés dans la fonction poss_j2
+
+/* ---- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ---- */
+// .  . Touts les fonctions utilisés dans la fonction poss_j2 .  .
+/* ---- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ---- */
+
 
 void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -362,7 +380,7 @@ void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 		if (j < 6 && i < 6)
 			if (d[i+2][j+2] == 0)
 			{
-				inserer(prises, i+2, j+2, l);
+				inserer(prises, i+2, j+2, k);
 				k += 2;
 			}
 	}
@@ -377,7 +395,7 @@ void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 		if (j < 6 && i > 1)
 			if (d[i+2][j-2] == 0)
 			{
-				inserer(prises, i+2, j-2, l);
+				inserer(prises, i+2, j-2, k);
 				k += 2;
 			}
 	}
@@ -386,7 +404,7 @@ void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 		if (i > 1 && j < 6)
 			if (d[i-2][j+2] == 0)
 			{
-				inserer(prises, i-2, j+2, l);
+				inserer(prises, i-2, j+2, k);
 				k += 2;
 			}
 
@@ -394,10 +412,12 @@ void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 		if (j > 1 && i > 1)
 			if (d[i-2][j-2] == 0)
 			{
-				inserer(prises, i-2, j-2, l);
+				inserer(prises, i-2, j-2, k);
 				k += 2;
 			}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas2_2(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -406,7 +426,7 @@ void cas2_2(int *mouvements, int *prises, damier d, int i, int j)
 		if (i > 1 && j < 6)
 			if (d[i-2][j+2] == 0)
 			{
-				inserer(prises, i-2, j+2, l);
+				inserer(prises, i-2, j+2, k);
 				k += 2;
 			}
 			
@@ -421,11 +441,13 @@ void cas2_2(int *mouvements, int *prises, damier d, int i, int j)
 		if (j < 6 && i < 6)
 			if (d[i+2][j+2] == 0)
 			{
-				inserer(prises, i+2, j+2, l);
+				inserer(prises, i+2, j+2, k);
 				k += 2;
 			}
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas2_3(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -434,7 +456,7 @@ void cas2_3(int *mouvements, int *prises, damier d, int i, int j)
 		if (j > 1 && i > 1)
 			if (d[i-2][j-2] == 0)
 			{
-				inserer(prises, i-2, j-2, l);
+				inserer(prises, i-2, j-2, k);
 				k += 2;
 			}
 			
@@ -448,11 +470,13 @@ void cas2_3(int *mouvements, int *prises, damier d, int i, int j)
 		if (j < 6 && i > 1)
 			if (d[i+2][j-2] == 0)
 			{
-				inserer(prises, i+2, j-2, l);
+				inserer(prises, i+2, j-2, k);
 				k += 2;
 			}
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas2_4(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -466,11 +490,13 @@ void cas2_4(int *mouvements, int *prises, damier d, int i, int j)
 	{
 		if (d[i+2][j-2] == 0)
 		{
-			inserer(prises, i+2, j-2, l);
+			inserer(prises, i+2, j-2, k);
 			k += 2;
 		}
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void cas4(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -495,7 +521,6 @@ void cas4(int *mouvements, int *prises, damier d, int i, int j)
 		else if (d[x-1][y-1] == 2 || d[x-1][y-1] == 4)
 		{
 			arrete = 1;
-			printf("Un pion ennemi");
 		}
 		else if (d[x-1][y-1] == 1 || d[x-1][y-1] == 3)
 		{
@@ -512,7 +537,6 @@ void cas4(int *mouvements, int *prises, damier d, int i, int j)
 				else
 				{
 					arrete = 1;
-					printf("Un pion ami");
 				}
 			}
 		}
@@ -648,6 +672,8 @@ void cas4(int *mouvements, int *prises, damier d, int i, int j)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int poss_j2(int *mouvements, int *prises, damier d, int i, int j)
 
 {
@@ -677,15 +703,17 @@ int poss_j2(int *mouvements, int *prises, damier d, int i, int j)
 	{
 		cas4(mouvements, prises, d, i, j);
 	}
-	if (mouvements[0] != 0 && prises[0] != 0)
+	if (mouvements[0] != 0 || prises[0] != 0)
 		return 1;
 	else
 		return 0;
 }
 
-int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j) // remplir la liste de toutes les mouvements possibles d'un pion
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j) // remplir la liste des mouvements et des prises possibles d'un pion
 {
-	int n;
+	int n = 0, m = 0;
 	
 	mouvements[0] = 0;
 	mouvements[1] = i;
@@ -701,10 +729,36 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 	}
 	else
 	{
-		n = poss_j2(mouvements, prises, d, i, j);
+		m = poss_j2(mouvements, prises, d, i, j);
 	}
 	
-	return n;
+	return n+m;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui peuvent bouger
+{
+	int i, j, x = 1;
+	int prises[20];
+	int mouvements[20];
+	
+	t[0] = 0;
+	
+	for (i=0;i<8;i++)
+	{
+		for (j=0;j<8;j++)
+		{
+			if (cherche_poss(mouvements, prises, d, jr, i, j) != 0)
+			{
+				t[x] = i;
+				x++;
+				t[x] = j;
+				x++;
+				t[0]++;
+			}
+		}
+	}
 }
 
 
