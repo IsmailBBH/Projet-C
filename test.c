@@ -1,10 +1,11 @@
 
 #include "possibilites.h"
 #include "affichage.h"
+#include "menu.h"
 
 int main()
 {
-	int t[20];
+	int t[20], m;
 	//int prises[20];
 	//int mouvements[20];
 	damier d;
@@ -29,13 +30,20 @@ int main()
 	
 	while(1)
 	{
-		MLV_clear_window(MLV_COLOR_BLACK);
-		MLV_draw_image(fond, 0, 0);
-		affiche_damier(pion1, pion2, pion3, pion4, d);
-		affiche_pions(t);
-		MLV_actualise_window();
+		menu(&m);
+		if (m == 1)
+		{
+			while (1)
+			{
+				MLV_clear_window(MLV_COLOR_BLACK);
+				MLV_draw_image(fond, 0, 0);
+				affiche_damier(pion1, pion2, pion3, pion4, d);
+				affiche_pions(t);
+				MLV_actualise_window();
+			}
+		}
 	}
 	
 	MLV_free_window();
-	return 0;
+	exit(0);
 }
