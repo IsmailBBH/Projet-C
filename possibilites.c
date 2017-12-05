@@ -3,7 +3,6 @@
 #ifndef POSSIBILITESC
 #define POSSIBILITESC
 
-#include "types.h"
 #include "possibilites.h"
 
 // Gestion des mouvements poussibles d'un pion

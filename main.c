@@ -1,7 +1,6 @@
 
 #include "possibilites.h"
 #include "affichage.h"
-#include "menu.h"
 
 int main()
 {
@@ -33,14 +32,12 @@ int main()
 		menu(&m);
 		if (m == 1)
 		{
-			while (1)
-			{
 				MLV_clear_window(MLV_COLOR_BLACK);
 				MLV_draw_image(fond, 0, 0);
 				affiche_damier(pion1, pion2, pion3, pion4, d);
 				affiche_pions(t);
+				deplacer(pion1, 5, 0, 4, 1, d, pion1, pion2, pion3, pion4, fond);
 				MLV_actualise_window();
-			}
 		}
 	}
 	

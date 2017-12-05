@@ -1,11 +1,14 @@
 
 
-tester: test.c affichage.o possibilites.o
-	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` -g test.c `pkg-config --libs-only-l MLV` possibilites.o affichage.o  -o affichage
+tester: main.c affichage.o possibilites.o
+	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` main.c possibilites.o affichage.o -o tester `pkg-config --libs-only-l MLV` 
 
 affichage.o: affichage.c affichage.h
-	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` -g affichage.c `pkg-config --libs-only-l MLV` -o affichage
+	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` -c affichage.c `pkg-config --libs-only-l MLV`
 
 possibilites.o: possibilites.c possibilites.h
-	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` -g possibilites.c `pkg-config --libs-only-l MLV` -o possibilites
-
+	gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L MLV` -c possibilites.c `pkg-config --libs-only-l MLV`
+	
+clean:
+	rm *.o
+	rm tester

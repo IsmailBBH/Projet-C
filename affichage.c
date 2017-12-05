@@ -319,4 +319,125 @@ void menu(int *m)
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void actualiser(damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond)
+{
+	//MLV_clear_window(MLV_COLOR_BLACK);
+	MLV_draw_image(fond, 0, 0);
+	affiche_damier(p1, p2, p3, p4, d);
+	//MLV_actualise_window();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void deplacer(MLV_Image *image, int x1, int y1, int x2, int y2, 
+						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond) // x1 - y1: la position du pion ---- x2 - y2: la position ou on va se deplacer
+{
+	int i, j;
+	
+	printf("%d - %d ... %d - %d\n", x1, y1, x2, y2);
+	
+	int x = x1, y = y1;
+	int n = x2, m = y2;
+	
+	printf("%d - %d ... %d - %d\n", x, y, n, m);
+	
+	d[x1][y1] = 0;
+	
+	if (x==(n+1) && y==(m+1))
+	{
+		j = y*100;
+		for(i=x*100;i>=n*100;i--)
+		{
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(image, i, j);
+			actualiser(d, p1, p2, p3, p4, fond);
+			j--;
+			MLV_actualise_window();
+			MLV_wait_milliseconds(3);
+		}
+	}
+	
+	else if (x==n-1 && y==m+1)
+	{
+		n--;
+		m++;
+		j = m*100-100;
+		for(i=x*100;i>=n*100;i--)
+		{
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(image, i, j);
+			actualiser(d, p1, p2, p3, p4, fond);
+			j++;
+			MLV_actualise_window();
+			MLV_wait_milliseconds(3);
+		}
+	}
+	
+	else if(x==n+1 && y==m-1)
+	{
+		n++;
+		m--;
+		j = m+100;
+		for(i=n-100;i<=n;i++)
+		{
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(image, i, j);
+			actualiser(d, p1, p2, p3, p4, fond);
+			j--;
+			MLV_actualise_window();
+			MLV_wait_milliseconds(3);
+		}
+	}
+	
+	else if(x==n+1 && y==m+1)
+	{
+		n++;
+		m++;
+		j = m-100;
+		for(i=n-100;i<=n;i++)
+		{
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(image, i, j);
+			actualiser(d, p1, p2, p3, p4, fond);
+			j++;
+			MLV_actualise_window();
+			MLV_wait_milliseconds(3);
+		}
+	}
+	
+	d[x2][y2] = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
