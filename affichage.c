@@ -331,83 +331,74 @@ void actualiser(damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void deplacer(MLV_Image *image, int x1, int y1, int x2, int y2, 
+void deplacer(MLV_Image *image, int x, int y, int n, int m, 
 						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond) // x1 - y1: la position du pion ---- x2 - y2: la position ou on va se deplacer
 {
 	int i, j;
 	
-	printf("%d - %d ... %d - %d\n", x1, y1, x2, y2);
+	//printf("%d - %d ... %d - %d\n", x1, y1, x2, y2);
 	
-	int x = x1, y = y1;
-	int n = x2, m = y2;
+	//printf("%d - %d ... %d - %d\n", x, y, n, m);
 	
-	printf("%d - %d ... %d - %d\n", x, y, n, m);
+	d[x][y] = 0;
 	
-	d[x1][y1] = 0;
-	
-	if (x==(n+1) && y==(m+1))
+	if (x>n && y>m)
 	{
-		j = y*100;
-		for(i=x*100;i>=n*100;i--)
+		j = x*100;
+		for(i=y*100;i>=m*100;i--)
 		{
 			MLV_clear_window(MLV_COLOR_BLACK);
-			MLV_draw_image(image, i, j);
 			actualiser(d, p1, p2, p3, p4, fond);
+			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(3);
+			MLV_wait_milliseconds(2);
 		}
 	}
 	
-	else if (x==n-1 && y==m+1)
+	else if (x<n && y>m)
 	{
-		n--;
-		m++;
-		j = m*100-100;
-		for(i=x*100;i>=n*100;i--)
+		j = x*100;
+		for(i=y*100;i>=m*100;i--)
 		{
 			MLV_clear_window(MLV_COLOR_BLACK);
-			MLV_draw_image(image, i, j);
 			actualiser(d, p1, p2, p3, p4, fond);
+			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(3);
+			MLV_wait_milliseconds(2);
 		}
 	}
 	
-	else if(x==n+1 && y==m-1)
+	else if(x>n && y<m)
 	{
-		n++;
-		m--;
-		j = m+100;
-		for(i=n-100;i<=n;i++)
+		j = x*100;
+		for(i=y*100;i<=m*100;i++)
 		{
 			MLV_clear_window(MLV_COLOR_BLACK);
-			MLV_draw_image(image, i, j);
 			actualiser(d, p1, p2, p3, p4, fond);
+			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(3);
+			MLV_wait_milliseconds(2);
 		}
 	}
 	
-	else if(x==n+1 && y==m+1)
+	else if(x<n && y<m)
 	{
-		n++;
-		m++;
-		j = m-100;
-		for(i=n-100;i<=n;i++)
+		j = x*100;
+		for(i=y*100;i<=m*100;i++)
 		{
 			MLV_clear_window(MLV_COLOR_BLACK);
-			MLV_draw_image(image, i, j);
 			actualiser(d, p1, p2, p3, p4, fond);
+			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(3);
+			MLV_wait_milliseconds(2);
 		}
 	}
 	
-	d[x2][y2] = 1;
+	d[n][m] = 1;
 }
 
 

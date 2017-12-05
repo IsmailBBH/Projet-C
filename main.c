@@ -36,7 +36,7 @@ int main()
 				MLV_draw_image(fond, 0, 0);
 				affiche_damier(pion1, pion2, pion3, pion4, d);
 				affiche_pions(t);
-				deplacer(pion1, 5, 0, 4, 1, d, pion1, pion2, pion3, pion4, fond);
+				deplacer(pion1, 5, 2, 6, 3, d, pion1, pion2, pion3, pion4, fond);
 				MLV_actualise_window();
 		}
 	}
