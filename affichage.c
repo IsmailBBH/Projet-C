@@ -20,9 +20,11 @@ void init_damier(damier d) // initialiser le damier
 							{0,0,0,0,0,0,0,0},
 							{1,0,1,0,1,0,1,0},
 							{0,1,0,1,0,1,0,1},
-							{1,0,1,0,1,0,1,0}};
+							{1,0,1,0,1,0,1,0},
+							{0,12,12,0,0,0,0,0}}; // d[8][1]: nombre des pions du premier joueur
+																		// d[8][2]: nombre des pions du premier joueur
 							
-	for (i=0;i<8;i++)
+	for (i=0;i<9;i++)
 		for (j=0;j<8;j++)
 			d[i][j] = t[i][j];
 }
@@ -331,74 +333,120 @@ void actualiser(damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void deplacer(MLV_Image *image, int x, int y, int n, int m, 
-						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond) // x1 - y1: la position du pion ---- x2 - y2: la position ou on va se deplacer
+void deplacer(MLV_Image *image, int x, int y, int m, int n, 
+						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond) // x - y: la position du pion ---- m - n: la position ou on va se deplacer
 {
-	int i, j;
+	int i, j, p;
 	
-	//printf("%d - %d ... %d - %d\n", x1, y1, x2, y2);
-	
-	//printf("%d - %d ... %d - %d\n", x, y, n, m);
-	
+	p = d[x][y];
 	d[x][y] = 0;
 	
-	if (x>n && y>m)
+	if (x>m && y>n)
 	{
 		j = x*100;
-		for(i=y*100;i>=m*100;i--)
+		for(i=y*100;i>=n*100;i--)
 		{
+			if (i % 100 == 0) // si il y a un pion ennemi dans sa route il va le manger
+			{
+				if (d[j/100][i/100] != p && d[j/100][i/100] != 0)
+				{
+					d[j/100][i/100] = 0;
+					if (p == 1 || p == 3)
+						d[8][2]--;
+					else if (p == 2 || p == 4)
+						d[8][1]--;
+				}
+			}
 			MLV_clear_window(MLV_COLOR_BLACK);
 			actualiser(d, p1, p2, p3, p4, fond);
 			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(2);
+			MLV_wait_milliseconds(1);
 		}
 	}
 	
-	else if (x<n && y>m)
+	else if (x<m && y>n)
 	{
 		j = x*100;
-		for(i=y*100;i>=m*100;i--)
+		for(i=y*100;i>=n*100;i--)
 		{
+			if (i % 100 == 0) // si il y a un pion ennemi dans sa route il va le manger
+			{
+				if (d[j/100][i/100] != p && d[j/100][i/100] != 0)
+				{
+					d[j/100][i/100] = 0;
+					if (p == 1 || p == 3)
+						d[8][2]--;
+					else
+						d[8][1]--;
+				}
+			}
 			MLV_clear_window(MLV_COLOR_BLACK);
 			actualiser(d, p1, p2, p3, p4, fond);
 			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(2);
+			MLV_wait_milliseconds(1);
 		}
 	}
 	
-	else if(x>n && y<m)
+	else if(x>m && y<n)
 	{
 		j = x*100;
-		for(i=y*100;i<=m*100;i++)
+		for(i=y*100;i<=n*100;i++)
 		{
+			if (i % 100 == 0) // si il y a un pion ennemi dans sa route il va le manger
+			{
+				if (d[j/100][i/100] != p && d[j/100][i/100] != 0)
+				{
+					d[j/100][i/100] = 0;
+					if (p == 1 || p == 3)
+						d[8][2]--;
+					else
+						d[8][1]--;
+				}
+			}
 			MLV_clear_window(MLV_COLOR_BLACK);
 			actualiser(d, p1, p2, p3, p4, fond);
 			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(2);
+			MLV_wait_milliseconds(1);
 		}
 	}
 	
-	else if(x<n && y<m)
+	else if(x<m && y<n)
 	{
 		j = x*100;
-		for(i=y*100;i<=m*100;i++)
+		for(i=y*100;i<=n*100;i++)
 		{
+			if (i % 100 == 0) // si il y a un pion ennemi dans sa route il va le manger
+			{
+				if (d[j/100][i/100] != p && d[j/100][i/100] != 0)
+				{
+					d[j/100][i/100] = 0;
+					if (p == 1 || p == 3)
+						d[8][2]--;
+					else
+						d[8][1]--;
+				}
+			}
 			MLV_clear_window(MLV_COLOR_BLACK);
 			actualiser(d, p1, p2, p3, p4, fond);
 			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
-			MLV_wait_milliseconds(2);
+			MLV_wait_milliseconds(1);
 		}
 	}
 	
-	d[n][m] = 1;
+	if (p == 1 && m == 0)
+		d[m][n] = 3;
+	else if (p == 2 && m == 7)
+		d[m][n] = 4;
+	else
+		d[m][n] = p;
 }
 
 

@@ -503,7 +503,7 @@ void cas2_4(int *mouvements, int *prises, damier d, int i, int j)
 void cas4(int *mouvements, int *prises, damier d, int i, int j)
 {
 	int x = i, y = j;
-	int l = 3, k = 3, arrete = 0, active = 0; // arrete : pour arreter le parcours de damier, active : pour activer le mode de pris
+	int l = 3, k = 3, arrete = 0, active = 0; // arrete : pour arreter le parcours de damier, active : pour annoncer que tout les possibilités qui viennent après sont des prises
 	
 	while (x > 0 && y > 0 && arrete == 0)
 	{

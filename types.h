@@ -9,7 +9,7 @@
 /* types.h : l'ensemble des types utilisés dans le jeu */
 
 
-typedef int damier[8][8];
+typedef int damier[9][8];
 
 typedef struct
 {
