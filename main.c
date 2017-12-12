@@ -9,8 +9,7 @@ int main()
 	//int prises[20];
 	//int mouvements[20];
 	damier d;
-	joueur jr = J1;
-	init_damier(d);
+	joueur jr;
 	
 	MLV_Image *fond;
 	MLV_Image *p1;
@@ -20,7 +19,7 @@ int main()
 	
 	MLV_create_window("Game Of Draughts", "GOD", 1200, 800);
 	
-	fond = MLV_load_image("Images/DAMIER.png");
+	fond = MLV_load_image("Images/fond.jpg");
 	p1 = MLV_load_image("Images/1.png");
 	p2 = MLV_load_image("Images/2.png");
 	p3 = MLV_load_image("Images/3.png");
@@ -33,7 +32,9 @@ int main()
 		menu(&m);
 		if (m == 1)
 		{
-			while (d[8][1] != 0 || d[8][2] != 0)
+			init_damier(d);
+			jr = J1;
+			while (d[8][1] != 0 && d[8][2] != 0)
 			{
 				MLV_clear_window(MLV_COLOR_BLACK);
 				MLV_actualise_window();

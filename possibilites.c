@@ -55,7 +55,7 @@ void cas1_1(int *mouvements, int *prises, damier d, int i, int j)
 	}
 
 	if (d[i+1][j-1] == 2 || d[i+1][j-1] == 4)
-		if (i > 1 && j < 6)
+		if (i < 6 && j > 1) // ********************************************************************************************************************************************
 			if (d[i+2][j-2] == 0)
 			{
 				inserer(prises, i+2, j-2, k);
@@ -121,7 +121,7 @@ void cas1_3(int *mouvements, int *prises, damier d, int i, int j)
 	}
 			
 	if (d[i+1][j-1] == 2 || d[i+1][j-1] == 4)
-		if (i > 1 && j < 6)
+		if (i < 6 && j > 1)
 			if (d[i+2][j-2] == 0)
 			{
 				inserer(prises, i+2, j-2, k);
@@ -394,7 +394,7 @@ void cas2_1(int *mouvements, int *prises, damier d, int i, int j)
 	}
 	else if (d[i+1][j-1] == 1 || d[i+1][j-1] == 3)
 	{
-		if (j < 6 && i > 1)
+		if (j > 1 && i < 6)
 			if (d[i+2][j-2] == 0)
 			{
 				inserer(prises, i+2, j-2, k);
@@ -469,7 +469,7 @@ void cas2_3(int *mouvements, int *prises, damier d, int i, int j)
 	}
 	else if (d[i+1][j-1] == 1 || d[i+1][j-1] == 3)
 	{
-		if (j < 6 && i > 1)
+		if (j > 1 && i < 6)
 			if (d[i+2][j-2] == 0)
 			{
 				inserer(prises, i+2, j-2, k);
@@ -734,6 +734,9 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 		m = poss_j2(mouvements, prises, d, i, j);
 	}
 	
+	if (prises[0] != 0)
+		mouvements[0] = 0;
+	
 	return n+m;
 }
 
@@ -741,9 +744,11 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 
 void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui peuvent bouger
 {
-	int i, j, x = 1;
+	int i, j, x = 1, y = 1;
 	int prises[20];
 	int mouvements[20];
+	int t_p[20];
+	t_p[0] = 0;
 	
 	t[0] = 0;
 	
@@ -753,14 +758,30 @@ void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui
 		{
 			if (cherche_poss(mouvements, prises, d, jr, i, j) != 0)
 			{
-				t[x] = i;
-				x++;
-				t[x] = j;
-				x++;
-				t[0]++;
+				if (prises[0] != 0)
+				{
+					t_p[y] = i;
+					y++;
+					t_p[y] = j;
+					y++;
+					t_p[0]++;
+				}
+				
+				else
+				{
+					t[x] = i;
+					x++;
+					t[x] = j;
+					x++;
+					t[0]++;
+				}
 			}
 		}
 	}
+	
+	if (t_p[0] != 0)
+		for(i=0;i<t_p[0]*2+1;i++)
+			t[i] = t_p[i];
 }
 
 

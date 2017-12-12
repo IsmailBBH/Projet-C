@@ -55,7 +55,7 @@ void affiche_damier(MLV_Image *pion1, MLV_Image *pion2, MLV_Image *pion3, MLV_Im
 void affiche_pions(int t[]) // l'affichage des pions qui peuvent bouger
 {
 	int i = 1;
-	while (i <= t[0]*2+1)
+	while (i < t[0]*2+1)
 	{
 		MLV_draw_rectangle(t[i+1]*100, t[i]*100, 100, 100, MLV_COLOR_BLUE);
 		i += 2;
@@ -67,13 +67,13 @@ void affiche_pions(int t[]) // l'affichage des pions qui peuvent bouger
 void affiche_poss(int *m, int *p) // l'affichage des mouvements et les prises possibles d'un pion
 {
 	int i = 3;
-	while (i <= m[0]*2+3)
+	while (i < m[0]*2+3)
 	{
 		MLV_draw_rectangle(m[i+1]*100, m[i]*100, 100, 100, MLV_COLOR_GREEN); // vert pour les mouvements
 		i += 2;
 	}
 	i = 3;
-	while (i <= p[0]*2+3)
+	while (i < p[0]*2+3)
 	{
 		MLV_draw_rectangle(p[i+1]*100, p[i]*100, 100, 100, MLV_COLOR_RED); // rouge pour les prises
 		i += 2;

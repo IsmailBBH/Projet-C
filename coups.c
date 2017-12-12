@@ -82,6 +82,7 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 					
 					while (prises[0] != 0)
 					{
+						joue3 = 0;
 						affiche_poss(v, prises);
 						MLV_actualise_window();
 						while (joue3 == 0)
@@ -97,7 +98,9 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 								joue3 = 1;
 							}
 						}
-						cherche_poss(mouvements, prises, d, *jr, cp.y, cp.x);
+						cherche_poss(mouvements, prises, d, *jr, y, x);
+						cp.y = y;
+						cp.x = x;
 					}
 					joue2 = 1;
 					joue1 = 1;
@@ -109,9 +112,15 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 	}
 	
 	if (*jr == J1)
+	{
+		d[8][3]++;
 		*jr = J2;
+	}
 	else
+	{
+		d[8][4]++;
 		*jr = J1;
+	}
 }
 
 #endif
