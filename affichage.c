@@ -82,7 +82,7 @@ void affiche_poss(int *m, int *p) // l'affichage des mouvements et les prises po
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void menu(int *m)
+void menu(int *m) // l'affichage de menu
 {
 	int x, y;
 	
@@ -121,7 +121,7 @@ void menu(int *m)
 	son = son_on;
 	*m = -1;
 	
-	while(*m == -1)
+	while(*m == -1) // tant que le joueur n'a pas appuyé sur un choix
 	{
 		MLV_draw_image(fond_menu, 0, 0);
 		MLV_draw_image(jouer1, 350, 220);
@@ -134,9 +134,7 @@ void menu(int *m)
 		MLV_actualise_window();
 		MLV_get_mouse_position(&x, &y);
 		
-		// 2 Joueurs
-		
-		while (x >= 350 && x <= 530 && y >= 220 && y <= 411)
+		while (x >= 350 && x <= 530 && y >= 220 && y <= 411) // 2 Joueurs
 		{
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
@@ -165,11 +163,9 @@ void menu(int *m)
 				MLV_wait_milliseconds(70);
 				return;
 			}
-		
-		// J vs CPU
-		
 		}
-		while (x >= 730 && x <= 921 && y >= 220 && y <= 411)
+		
+		while (x >= 730 && x <= 921 && y >= 220 && y <= 411) // J vs CPU
 		{
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
@@ -200,9 +196,7 @@ void menu(int *m)
 			}
 		}
 		
-		// Charger partie
-		
-		while (x >= 485 && x <= 754 && y >= 450 && y <= 514)
+		while (x >= 485 && x <= 754 && y >= 450 && y <= 514) // Charger partie
 		{
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
@@ -233,9 +227,7 @@ void menu(int *m)
 			}
 		}
 		
-		// Meilleur score
-		
-		while (x >= 485 && x <= 754 && y >= 550 && y <= 614)
+		while (x >= 485 && x <= 754 && y >= 550 && y <= 614) // Meilleur score
 		{
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
@@ -266,9 +258,7 @@ void menu(int *m)
 			}
 		}
 		
-		// Quitter
-		
-		while (x >= 485 && x <= 754 && y >= 650 && y <= 714)
+		while (x >= 485 && x <= 754 && y >= 650 && y <= 714) // Quitter
 		{
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
@@ -298,67 +288,70 @@ void menu(int *m)
 			}
 		}
 		
-		// Son
-			MLV_get_event(NULL, NULL, NULL, NULL, NULL, &x, &y, &bouton, &etat);
-			if (x >= 1100 && x <= 1158 && y >= 720 && y <= 770 && bouton == MLV_BUTTON_LEFT && etat == MLV_PRESSED)
-			{
-				if (son == son_on)
-					son = son_off;
-				else
-					son = son_on;
-				MLV_clear_window(MLV_COLOR_BLACK);
-				MLV_draw_image(fond_menu, 0, 0);
-				MLV_draw_image(jouer1, 350, 220);
-				MLV_draw_image(jouer3, 730, 220);
-				MLV_draw_image(charger1, 485, 450);
-				MLV_draw_image(score1, 485, 550);
-				MLV_draw_image(quitter1, 485, 650);
-				MLV_draw_image(son, 1100, 720);
-				MLV_actualise_window();
-				*m = 5;
-			}
-			bouton = MLV_BUTTON_RIGHT;
+		MLV_get_event(NULL, NULL, NULL, NULL, NULL, &x, &y, &bouton, &etat); // Son
+		if (x >= 1100 && x <= 1158 && y >= 720 && y <= 770 && bouton == MLV_BUTTON_LEFT && etat == MLV_PRESSED)
+		{
+			if (son == son_on)
+				son = son_off;
+			else if (son == son_off)
+				son = son_on;
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(fond_menu, 0, 0);
+			MLV_draw_image(jouer1, 350, 220);
+			MLV_draw_image(jouer3, 730, 220);
+			MLV_draw_image(charger1, 485, 450);
+			MLV_draw_image(score1, 485, 550);
+			MLV_draw_image(quitter1, 485, 650);
+			MLV_draw_image(son, 1100, 720);
+			MLV_actualise_window();
+			*m = 5;
+		}
+		bouton = MLV_BUTTON_RIGHT;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void actualiser(damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond)
+void actualiser(damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver) // actualiser l'ecran
 {
-	//MLV_clear_window(MLV_COLOR_BLACK);
 	MLV_draw_image(fond, 0, 0);
 	affiche_damier(p1, p2, p3, p4, d);
-	//MLV_actualise_window();
+	MLV_draw_text_with_font(910, 193, "%d", police, MLV_COLOR_WHITE, d[8][3]);
+	MLV_draw_text_with_font(1095, 193, "%d", police, MLV_COLOR_WHITE, d[8][4]);
+	MLV_draw_text_with_font(910, 303, "%d", police, MLV_COLOR_WHITE, d[8][1]);
+	MLV_draw_text_with_font(1095, 303, "%d", police, MLV_COLOR_WHITE, d[8][2]);
+	MLV_draw_image(sauver, 920, 600);
+	MLV_draw_image(retour, 920, 700);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void deplacer(MLV_Image *image, int x, int y, int m, int n, 
-						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond) // x - y: la position du pion ---- m - n: la position ou on va se deplacer
+						  damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver) // x - y: la position du pion ---- m - n: la position ou on va se deplacer
 {
 	int i, j, p;
 	
-	p = d[x][y];
-	d[x][y] = 0;
+	p = d[x][y]; // on garde le genre du pion
+	d[x][y] = 0; // on l'efface de sa case de départ
 	
-	if (x>m && y>n)
+	if (x>m && y>n) // si la destination se trouve en haut à gauche
 	{
 		j = x*100;
 		for(i=y*100;i>=n*100;i--)
 		{
-			if (i % 100 == 0) // si il y a un pion ennemi dans sa route il va le manger
+			if (i % 100 == 0) // si le pion arrive à une case
 			{
-				if (d[j/100][i/100] != p && d[j/100][i/100] != 0)
+				if (d[j/100][i/100] != p && d[j/100][i/100] != 0) // si il y a un pion ennemi dans sa route il va le manger
 				{
 					d[j/100][i/100] = 0;
-					if (p == 1 || p == 3)
+					if (p == 1 || p == 3) // on modifie le nombre des pions restatnts
 						d[8][2]--;
 					else if (p == 2 || p == 4)
 						d[8][1]--;
 				}
 			}
 			MLV_clear_window(MLV_COLOR_BLACK);
-			actualiser(d, p1, p2, p3, p4, fond);
+			actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
 			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
@@ -366,7 +359,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 		}
 	}
 	
-	else if (x<m && y>n)
+	else if (x<m && y>n) // si la destination se trouve en haut à droite
 	{
 		j = x*100;
 		for(i=y*100;i>=n*100;i--)
@@ -383,7 +376,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 				}
 			}
 			MLV_clear_window(MLV_COLOR_BLACK);
-			actualiser(d, p1, p2, p3, p4, fond);
+			actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
 			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
@@ -391,7 +384,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 		}
 	}
 	
-	else if(x>m && y<n)
+	else if(x>m && y<n) // si la destination se trouve en bas à gauche
 	{
 		j = x*100;
 		for(i=y*100;i<=n*100;i++)
@@ -408,7 +401,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 				}
 			}
 			MLV_clear_window(MLV_COLOR_BLACK);
-			actualiser(d, p1, p2, p3, p4, fond);
+			actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
 			MLV_draw_image(image, i, j);
 			j--;
 			MLV_actualise_window();
@@ -416,7 +409,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 		}
 	}
 	
-	else if(x<m && y<n)
+	else if(x<m && y<n) // si la destination se trouve en bas à droite
 	{
 		j = x*100;
 		for(i=y*100;i<=n*100;i++)
@@ -432,8 +425,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 						d[8][1]--;
 				}
 			}
-			MLV_clear_window(MLV_COLOR_BLACK);
-			actualiser(d, p1, p2, p3, p4, fond);
+			actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
 			MLV_draw_image(image, i, j);
 			j++;
 			MLV_actualise_window();
@@ -441,7 +433,7 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 		}
 	}
 	
-	if (p == 1 && m == 0)
+	if (p == 1 && m == 0) // si il est arrivé au bout du damier on transforme le pion en reinne
 		d[m][n] = 3;
 	else if (p == 2 && m == 7)
 		d[m][n] = 4;
@@ -449,9 +441,34 @@ void deplacer(MLV_Image *image, int x, int y, int m, int n,
 		d[m][n] = p;
 }
 
+void affichage_score(MLV_Image *fond, MLV_Font *police) // l"affichage du score
+{
+	int y = 600;
+	int rang, score;
+	char *nom;
+	
+	FILE* topscore = NULL;
+	topscore = fopen("topscore.txt","r");
+	
+	
+	MLV_clear_window(MLV_COLOR_BLACK);
+	MLV_draw_image(fond, 0, 0);
+	
+	while (fscanf(topscore, "%d %d %s", &rang, &score, nom) != EOF)
+	{
+		MLV_draw_text_with_font(500, y, "%d - %d - %s", police, MLV_COLOR_WHITE, rang, score, nom);
+		y -= 50;
+	}
+	
+	MLV_actualise_window();
+	
+	fclose(topscore);
+}
 
-
-
+void egalitee(MLV_Image *oui, MLV_Image *non)
+{
+	
+}
 
 
 

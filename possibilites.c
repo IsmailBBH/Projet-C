@@ -745,9 +745,9 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui peuvent bouger
 {
 	int i, j, x = 1, y = 1;
-	int prises[20];
-	int mouvements[20];
-	int t_p[20];
+	int prises[50];
+	int mouvements[50];
+	int t_p[50];
 	t_p[0] = 0;
 	
 	t[0] = 0;
