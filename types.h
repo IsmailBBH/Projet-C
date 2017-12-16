@@ -11,7 +11,7 @@
 
 typedef int tab2[10][2];
 
-typedef char *string[10];
+typedef char string[10][50];
 
 typedef int damier[9][8];
 

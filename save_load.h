@@ -11,6 +11,6 @@ int sauvegarder(damier d, joueur jr);
 
 int chargement(damier d, joueur *jr);
 
-int meilleur_score(int nb_coup, char *nom);
+int meilleur_score(int nb_coup, MLV_Font *p);
 
 #endif

@@ -24,6 +24,7 @@ int main()
 	
 	MLV_Font *police;
 	MLV_Font *p;
+	MLV_Font *font;
 	
 	MLV_create_window("Game Of Draughts", "GOD", 1200, 800);
 	
@@ -38,6 +39,7 @@ int main()
 	
 	police = MLV_load_font("Images/police.ttf", 40);
 	p = MLV_load_font("Images/BebasNeue.otf", 40);
+	font = MLV_load_font("Images/BebasNeue.otf", 20);
 	
 	//analyser_damier(d, t, jr);
 	
@@ -57,11 +59,15 @@ int main()
 				{
 					sauvegarder(d, jr);
 				}
-				if (d[8][1] != 1 && d[8][2] != 1)
+				/*if (d[8][1] != 1 && d[8][2] != 1)
 				{
 					egalitee();
-				}
+				}*/
 			}
+			if (d[8][1] == 0)
+				meilleur_score(10, font);
+			else
+				meilleur_score(10, font);
 			m = 0;
 		}
 		
@@ -110,7 +116,6 @@ int main()
 		
 		else if (m == 4)
 		{
-			meilleur_score(2, "Ismail");
 			while (1)
 			{
 				affichage_score(fond_score, p);
