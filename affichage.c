@@ -13,15 +13,15 @@
 void init_damier(damier d) // initialiser le damier
 {
 	int i, j;
-	damier t = {{0,0,0,0,0,0,0,0},
+	damier t = {{0,2,0,2,0,2,0,2},
+							{2,0,2,0,2,0,2,0},
+							{0,2,0,2,0,2,0,2},
 							{0,0,0,0,0,0,0,0},
 							{0,0,0,0,0,0,0,0},
-							{0,0,0,0,0,0,0,0},
-							{0,0,0,2,0,0,0,0},
-							{0,0,0,0,1,0,0,0},
-							{0,0,0,0,0,0,0,0},
-							{0,0,0,0,0,0,0,0},
-							{0,1,1,15,15,0,0,0}}; // d[8][1]: nombre des pions du premier joueur
+							{1,0,1,0,1,0,1,0},
+							{0,1,0,1,0,1,0,1},
+							{1,0,1,0,1,0,1,0},
+							{0,12,12,0,0,0,0,0}}; // d[8][1]: nombre des pions du premier joueur
 																		// d[8][2]: nombre des pions du premier joueur
 							
 	for (i=0;i<9;i++)
@@ -97,9 +97,6 @@ void menu(int *m) // l'affichage de menu
 	MLV_Image *score2;
 	MLV_Image *quitter1;
 	MLV_Image *quitter2;
-	MLV_Image *son_on;
-	MLV_Image *son_off;
-	MLV_Image *son;
 	
 	MLV_Mouse_button bouton;
 	MLV_Button_state etat;
@@ -116,9 +113,6 @@ void menu(int *m) // l'affichage de menu
 	score2 = MLV_load_image("Menu/Score.png");
 	quitter1 = MLV_load_image("Menu/Q.png");
 	quitter2 = MLV_load_image("Menu/Quitter.png");
-	son_on = MLV_load_image("Menu/ON.png");
-	son_off = MLV_load_image("Menu/OFF.png");
-	son = son_on;
 	*m = -1;
 	
 	while(*m == -1) // tant que le joueur n'a pas appuyé sur un choix
@@ -130,7 +124,6 @@ void menu(int *m) // l'affichage de menu
 		MLV_draw_image(score1, 485, 550);
 		MLV_draw_image(quitter1, 485, 650);
 		MLV_draw_image(quitter1, 485, 650);
-		MLV_draw_image(son, 1100, 720);
 		MLV_actualise_window();
 		MLV_get_mouse_position(&x, &y);
 		
@@ -144,7 +137,6 @@ void menu(int *m) // l'affichage de menu
 			MLV_draw_image(charger1, 485, 450);
 			MLV_draw_image(score1, 485, 550);
 			MLV_draw_image(quitter1, 485, 650);
-			MLV_draw_image(son, 1100, 720);
 			MLV_actualise_window();
 			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
@@ -156,7 +148,6 @@ void menu(int *m) // l'affichage de menu
 				MLV_draw_image(charger1, 485, 450);
 				MLV_draw_image(score1, 485, 550);
 				MLV_draw_image(quitter1, 485, 650);
-				MLV_draw_image(son, 1100, 720);
 				MLV_actualise_window();
 				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 				*m = 1;
@@ -175,7 +166,6 @@ void menu(int *m) // l'affichage de menu
 			MLV_draw_image(charger1, 485, 450);
 			MLV_draw_image(score1, 485, 550);
 			MLV_draw_image(quitter1, 485, 650);
-			MLV_draw_image(son, 1100, 720);
 			MLV_actualise_window();
 			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
@@ -187,7 +177,6 @@ void menu(int *m) // l'affichage de menu
 				MLV_draw_image(charger1, 485, 450);
 				MLV_draw_image(score1, 485, 550);
 				MLV_draw_image(quitter1, 485, 650);
-				MLV_draw_image(son, 1100, 720);
 				MLV_actualise_window();
 				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 				*m = 2;
@@ -206,7 +195,6 @@ void menu(int *m) // l'affichage de menu
 			MLV_draw_image(charger2, 485, 450);
 			MLV_draw_image(score1, 485, 550);
 			MLV_draw_image(quitter1, 485, 650);
-			MLV_draw_image(son, 1100, 720);
 			MLV_actualise_window();
 			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
@@ -218,7 +206,6 @@ void menu(int *m) // l'affichage de menu
 				MLV_draw_image(charger2, 490, 455);
 				MLV_draw_image(score1, 485, 550);
 				MLV_draw_image(quitter1, 485, 650);
-				MLV_draw_image(son, 1100, 720);
 				MLV_actualise_window();
 				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 				*m = 3;
@@ -237,7 +224,6 @@ void menu(int *m) // l'affichage de menu
 			MLV_draw_image(charger1, 485, 450);
 			MLV_draw_image(score2, 485, 550);
 			MLV_draw_image(quitter1, 485, 650);
-			MLV_draw_image(son, 1100, 720);
 			MLV_actualise_window();
 			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
@@ -249,7 +235,6 @@ void menu(int *m) // l'affichage de menu
 				MLV_draw_image(charger1, 485, 450);
 				MLV_draw_image(score2, 490, 555);
 				MLV_draw_image(quitter1, 485, 650);
-				MLV_draw_image(son, 1100, 720);
 				MLV_actualise_window();
 				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 				*m = 4;
@@ -268,7 +253,6 @@ void menu(int *m) // l'affichage de menu
 			MLV_draw_image(charger1, 485, 450);
 			MLV_draw_image(score1, 485, 550);
 			MLV_draw_image(quitter2, 485, 650);
-			MLV_draw_image(son, 1100, 720);
 			MLV_actualise_window();
 			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
 			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
@@ -280,7 +264,6 @@ void menu(int *m) // l'affichage de menu
 				MLV_draw_image(charger1, 485, 450);
 				MLV_draw_image(score1, 485, 550);
 				MLV_draw_image(quitter2, 490, 655);
-				MLV_draw_image(son, 1100, 720);
 				MLV_actualise_window();
 				MLV_wait_milliseconds(70);
 				MLV_free_window();
@@ -288,24 +271,100 @@ void menu(int *m) // l'affichage de menu
 			}
 		}
 		
-		MLV_get_event(NULL, NULL, NULL, NULL, NULL, &x, &y, &bouton, &etat); // Son
-		if (x >= 1100 && x <= 1158 && y >= 720 && y <= 770 && bouton == MLV_BUTTON_LEFT && etat == MLV_PRESSED)
+		bouton = MLV_BUTTON_RIGHT;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void menu_sauve(int *m, int *s) // l'affichage de menu
+{
+	int x, y;
+	
+	MLV_Image *fond_menu;
+	MLV_Image *jouer1;
+	MLV_Image *jouer2;
+	MLV_Image *jouer3;
+	MLV_Image *jouer4;
+	MLV_Image *retour;
+	
+	MLV_Mouse_button bouton;
+	MLV_Button_state etat;
+	
+	fond_menu = MLV_load_image("Menu/SCREEN.png");
+	jouer1 = MLV_load_image("Menu/2_j.png");
+	jouer2 = MLV_load_image("Menu/2_joueurs.png");
+	
+	jouer3 = MLV_load_image("Menu/JCPU.png");
+	jouer4 = MLV_load_image("Menu/J_vs_CPU.png");
+	retour = MLV_load_image("Menu/retour.png");
+	
+	*m = -1;
+	*s = -1;
+	
+	while(*m == -1 && *s == -1) // tant que le joueur n'a pas appuyé sur un choix
+	{
+		MLV_draw_image(fond_menu, 0, 0);
+		MLV_draw_image(jouer1, 350, 220);
+		MLV_draw_image(jouer3, 730, 220);
+		MLV_draw_image(retour, 30, 30);
+		MLV_actualise_window();
+		MLV_get_mouse_position(&x, &y);
+		
+		while (x >= 350 && x <= 530 && y >= 220 && y <= 411) // 2 Joueurs
 		{
-			if (son == son_on)
-				son = son_off;
-			else if (son == son_off)
-				son = son_on;
+			MLV_get_mouse_position(&x, &y);
+			MLV_clear_window(MLV_COLOR_BLACK);
+			MLV_draw_image(fond_menu, 0, 0);
+			MLV_draw_image(jouer2, 350, 220);
+			MLV_draw_image(jouer3, 730, 220);
+			MLV_draw_image(retour, 30, 30);
+			MLV_actualise_window();
+			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
+			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
+			{
+				MLV_clear_window(MLV_COLOR_BLACK);
+				MLV_draw_image(fond_menu, 0, 0);
+				MLV_draw_image(jouer2, 355, 225);
+				MLV_draw_image(jouer3, 730, 220);
+				MLV_draw_image(retour, 30, 30);
+				MLV_actualise_window();
+				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
+				*s = 1;
+				MLV_wait_milliseconds(70);
+				return;
+			}
+		}
+		
+		while (x >= 730 && x <= 921 && y >= 220 && y <= 411) // J vs CPU
+		{
+			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
 			MLV_draw_image(jouer1, 350, 220);
-			MLV_draw_image(jouer3, 730, 220);
-			MLV_draw_image(charger1, 485, 450);
-			MLV_draw_image(score1, 485, 550);
-			MLV_draw_image(quitter1, 485, 650);
-			MLV_draw_image(son, 1100, 720);
+			MLV_draw_image(jouer4, 730, 220);
+			MLV_draw_image(retour, 30, 30);
 			MLV_actualise_window();
-			*m = 5;
+			MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
+			while (bouton == MLV_BUTTON_LEFT && etat != MLV_RELEASED)
+			{
+				MLV_clear_window(MLV_COLOR_BLACK);
+				MLV_draw_image(fond_menu, 0, 0);
+				MLV_draw_image(jouer1, 350, 220);
+				MLV_draw_image(jouer4, 735, 225);
+				MLV_draw_image(retour, 30, 30);
+				MLV_actualise_window();
+				MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, &bouton, &etat);
+				*s = 2;
+				MLV_wait_milliseconds(70);
+				return;
+			}
 		}
+		
+		MLV_get_event(NULL, NULL, NULL, NULL, NULL, &x, &y, &bouton, &etat); // retour
+		if (x >= 30 && x <= 94 && y >= 30 && y <= 94 && bouton == MLV_BUTTON_LEFT && etat == MLV_PRESSED)
+			*m = 0;
+		
 		bouton = MLV_BUTTON_RIGHT;
 	}
 }
@@ -445,10 +504,10 @@ void affichage_score(MLV_Image *fond, MLV_Font *police) // l"affichage du score
 {
 	int y = 600;
 	int rang, score;
-	char *nom;
+	char nom[50];
 	
 	FILE* topscore = NULL;
-	topscore = fopen("topscore.txt","r");
+	topscore = fopen("Fichiers/topscore.txt","r");
 	
 	
 	MLV_clear_window(MLV_COLOR_BLACK);
@@ -463,11 +522,6 @@ void affichage_score(MLV_Image *fond, MLV_Font *police) // l"affichage du score
 	MLV_actualise_window();
 	
 	fclose(topscore);
-}
-
-void egalitee(MLV_Image *oui, MLV_Image *non)
-{
-	
 }
 
 
