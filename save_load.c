@@ -4,7 +4,7 @@
 
 #include "save_load.h"
 
-int sauvegarder_2jr(damier d, joueur jr)
+int sauvegarder_2jr(damier d, joueur jr) // sauvegarder le jeu en mode 2 Joueurs
 {
 	int i, j;
 	
@@ -29,7 +29,7 @@ int sauvegarder_2jr(damier d, joueur jr)
 	return 0;
 }
 
-int sauvegarder_cpu(damier d, joueur jr)
+int sauvegarder_cpu(damier d, joueur jr) // sauvegarder le jeu en mode Joueur vs CPU
 {
 	int i, j;
 	
@@ -54,7 +54,7 @@ int sauvegarder_cpu(damier d, joueur jr)
 	return 0;
 }
 
-int chargement_2jr(damier d, joueur *jr)
+int chargement_2jr(damier d, joueur *jr) // charger le jeu en mode 2 Joueurs
 {
 	int i, j;
 	
@@ -84,7 +84,7 @@ int chargement_2jr(damier d, joueur *jr)
 	return 0;
 }
 
-int chargement_cpu(damier d, joueur *jr)
+int chargement_cpu(damier d, joueur *jr) // charger le jeu en mode Joueur vs CPU
 {
 	int i, j;
 	
@@ -114,7 +114,7 @@ int chargement_cpu(damier d, joueur *jr)
 	return 0;
 }
 
-void ajouter(tab2 t,string t_noms, int nb_coup, char *nom, int *rang)
+void ajouter(tab2 t,string t_noms, int nb_coup, char *nom, int *rang) // ajouter un score dans les 2 tables
 {
 	int trouve = 0;
 	int i;
@@ -143,7 +143,7 @@ void ajouter(tab2 t,string t_noms, int nb_coup, char *nom, int *rang)
 }
 
 int meilleur_score(int nb_coup, MLV_Font *p, MLV_Image *oui, MLV_Image *non, int *m,
-											 damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver) //regarde si le score est un meilleur score et l'insere si s'en est un
+											 damier d, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver) // regarde si le score est un meilleur score et l'insere si s'en est un
 {
 	int rang = 0;
 	int x = 0, y = 0;
@@ -158,8 +158,8 @@ int meilleur_score(int nb_coup, MLV_Font *p, MLV_Image *oui, MLV_Image *non, int
 	if(topscore != NULL)
 	{
 		fscanf(topscore, "%d %d %s", &t[i][0], &t[i][1], t_noms[i]);
-		printf("%d %d %s\n", t[i][0], t[i][1], t_noms[i]);
-		if (t[i][1] > nb_coup)
+		
+		if (t[i][1] > nb_coup||t[i][1] == 0) // si le score est inférieur au dernier score
 		{
 			MLV_draw_text_with_font(840, 400, "Vôtre score est classé parmi les 10 mielleurs !", p, MLV_COLOR_WHITE);
 			MLV_draw_text_with_font(860, 420, "Est-ce-que vous voulez l'enregistrer?", p, MLV_COLOR_WHITE);
@@ -185,23 +185,17 @@ int meilleur_score(int nb_coup, MLV_Font *p, MLV_Image *oui, MLV_Image *non, int
 				
 					for(i=1;i<10;i++)
 					{
-						fscanf(topscore, "%d %d %s", &t[i][0], &t[i][1], t_noms[i]);
-						printf("%d %d %s\n", t[i][0], t[i][1], t_noms[i]);
+						fscanf(topscore, "%d %d %s", &t[i][0], &t[i][1], t_noms[i]); // on stock le nombres dans t est les noms dans t_noms
 					}
 			
-					//for(i=0;i<10;i++)
-					//	printf("%d %d %s\n", t[i][0], t[i][1], t_noms[i]);
-			
-					ajouter(t, t_noms, nb_coup, nom, &rang);
-					//for(i=0;i<10;i++)
-						//fprintf(topscore,"%d %d %s\n", t[i][0], t[i][1], t_noms[i]);
+					ajouter(t, t_noms, nb_coup, nom, &rang); // on ajoute le score
 				
 				
 					fclose(topscore);
 			
-					topscore = fopen("Fichiers/topscore.txt","w+");
+					topscore = fopen("Fichiers/topscore.txt","w+"); // on ouvre le fichier en mode supression et ecriture
 
-					for(i=0;i<10;i++)
+					for(i=0;i<10;i++) // on écrit dessus les nouveaux scores
 						fprintf(topscore,"%d %d %s\n", t[i][0], t[i][1], t_noms[i]);
 					
 					if (rang == 0)
@@ -211,7 +205,7 @@ int meilleur_score(int nb_coup, MLV_Font *p, MLV_Image *oui, MLV_Image *non, int
 					else
 						MLV_draw_text_with_font(840, 400, "Vous êtes classé le %dème dans le podium !", p, MLV_COLOR_WHITE, rang);
 				
-					MLV_draw_text_with_font(840, 420, "Vous voulez voir les mielleurs scores?", p, MLV_COLOR_WHITE);
+					MLV_draw_text_with_font(840, 420, "Vous voulez voir les mielleurs scores?", p, MLV_COLOR_WHITE); // on propose au joueur si il veut voir les scores
 					MLV_draw_image(oui, 920, 450);
 					MLV_draw_image(non, 1020, 450);
 					MLV_actualise_window();

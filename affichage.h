@@ -2,6 +2,8 @@
 #ifndef AFFICHAGEH
 #define AFFICHAGEH
 
+#include "types.h"
+
 void init_damier(damier d);
 
 void affiche_damier(MLV_Image *pion1, MLV_Image *pion2, MLV_Image *pion3, MLV_Image *pion4, damier d);

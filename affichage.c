@@ -3,10 +3,9 @@
 #ifndef AFFICHAGEC
 #define AFFICHAGEC
 
-#include "types.h"
 #include "affichage.h"
 
-/* affichage.h : fonction qui gèrent l'affichage */
+/* affichage.c : fonction qui gèrent l'affichage */
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,6 +116,7 @@ void menu(int *m) // l'affichage de menu
 	
 	while(*m == -1) // tant que le joueur n'a pas appuyé sur un choix
 	{
+		
 		MLV_draw_image(fond_menu, 0, 0);
 		MLV_draw_image(jouer1, 350, 220);
 		MLV_draw_image(jouer3, 730, 220);
@@ -129,6 +129,7 @@ void menu(int *m) // l'affichage de menu
 		
 		while (x >= 350 && x <= 530 && y >= 220 && y <= 411) // 2 Joueurs
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -158,6 +159,7 @@ void menu(int *m) // l'affichage de menu
 		
 		while (x >= 730 && x <= 921 && y >= 220 && y <= 411) // J vs CPU
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -187,6 +189,7 @@ void menu(int *m) // l'affichage de menu
 		
 		while (x >= 485 && x <= 754 && y >= 450 && y <= 514) // Charger partie
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -216,6 +219,7 @@ void menu(int *m) // l'affichage de menu
 		
 		while (x >= 485 && x <= 754 && y >= 550 && y <= 614) // Meilleur score
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -245,6 +249,7 @@ void menu(int *m) // l'affichage de menu
 		
 		while (x >= 485 && x <= 754 && y >= 650 && y <= 714) // Quitter
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -272,6 +277,7 @@ void menu(int *m) // l'affichage de menu
 		}
 		
 		bouton = MLV_BUTTON_RIGHT;
+		etat = MLV_RELEASED;
 	}
 }
 
@@ -313,6 +319,7 @@ void menu_sauve(int *m, int *s) // l'affichage de menu
 		
 		while (x >= 350 && x <= 530 && y >= 220 && y <= 411) // 2 Joueurs
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);
@@ -338,6 +345,7 @@ void menu_sauve(int *m, int *s) // l'affichage de menu
 		
 		while (x >= 730 && x <= 921 && y >= 220 && y <= 411) // J vs CPU
 		{
+			etat = MLV_RELEASED;
 			MLV_get_mouse_position(&x, &y);
 			MLV_clear_window(MLV_COLOR_BLACK);
 			MLV_draw_image(fond_menu, 0, 0);

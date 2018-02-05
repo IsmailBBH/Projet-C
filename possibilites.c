@@ -20,6 +20,7 @@ void inserer(int *t, int m, int n, int l)
 // .  . Touts les fonctions utilisés dans la fonction poss_j1 .  .
 /* ---- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ---- */
 
+// les fonctions suivantes traitent touts les mouvements possibles d'un pion
 
 void cas1_1(int *mouvements, int *prises, damier d, int i, int j)
 {
@@ -55,7 +56,7 @@ void cas1_1(int *mouvements, int *prises, damier d, int i, int j)
 	}
 
 	if (d[i+1][j-1] == 2 || d[i+1][j-1] == 4)
-		if (i < 6 && j > 1) // ********************************************************************************************************************************************
+		if (i < 6 && j > 1)
 			if (d[i+2][j-2] == 0)
 			{
 				inserer(prises, i+2, j-2, k);
@@ -681,22 +682,22 @@ int poss_j2(int *mouvements, int *prises, damier d, int i, int j)
 {
 	if (d[i][j] == 2)
 	{
-		if (j != 0 && j != 7 && i != 7) // 1er cas
+		if (j != 0 && j != 7 && i != 7) // 1er cas: le pion ne se trouve pas dans les boards du damier
 		{
 			cas2_1(mouvements, prises, d, i, j);
 		}
 		
-		else if (j == 0 && i != 0 && i != 7) // 2eme cas
+		else if (j == 0 && i != 0 && i != 7) // 2eme cas: le pion se trouve toute à gauche du damier
 		{
 			cas2_2(mouvements, prises, d, i, j);
 		}
 		
-		else if (j == 7 && i != 0 && i != 7) // 3eme cas
+		else if (j == 7 && i != 0 && i != 7) // 3eme cas: le pion se trouve toute à droite du damier
 		{
 			cas2_3(mouvements, prises, d, i, j);
 		}
 		
-		else if (j == 7 && i == 0) // 4eme cas
+		else if (j == 7 && i == 0) // 4eme cas: le pion se trouve toute en haut a droite
 		{
 			cas2_4(mouvements, prises, d, i, j);
 		}
@@ -717,7 +718,7 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 {
 	int n = 0, m = 0;
 	
-	mouvements[0] = 0;
+	mouvements[0] = 0; // première case pour le nobre des possibilités et les 2 autres pour les coordonnédu pions
 	mouvements[1] = i;
 	mouvements[2] = j;
 	
@@ -734,7 +735,7 @@ int cherche_poss(int *mouvements, int *prises, damier d, joueur jr, int i, int j
 		m = poss_j2(mouvements, prises, d, i, j);
 	}
 	
-	if (prises[0] != 0)
+	if (prises[0] != 0) // si on a des prises poussibles on ignore les mouvements
 		mouvements[0] = 0;
 	
 	return n+m;
@@ -752,13 +753,13 @@ void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui
 	
 	t[0] = 0;
 	
-	for (i=0;i<8;i++)
+	for (i=0;i<8;i++) // pour chaque case on cherche si il y a un pion qui peut bouger
 	{
 		for (j=0;j<8;j++)
 		{
 			if (cherche_poss(mouvements, prises, d, jr, i, j) != 0)
 			{
-				if (prises[0] != 0)
+				if (prises[0] != 0) // si il n'a pas de prises possibles on l'ajoute direct dans la table qu'on va renvoyer
 				{
 					t_p[y] = i;
 					y++;
@@ -767,7 +768,7 @@ void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui
 					t_p[0]++;
 				}
 				
-				else
+				else // si il esiste des prises possible on le stock dans un autre tableau
 				{
 					t[x] = i;
 					x++;
@@ -779,7 +780,7 @@ void analyser_damier(damier d, int *t, joueur jr) // renvoie touts les pions qui
 		}
 	}
 	
-	if (t_p[0] != 0)
+	if (t_p[0] != 0) // si on des pion qui peuvent manger, on les prend et on ignore les autre
 		for(i=0;i<t_p[0]*2+1;i++)
 			t[i] = t_p[i];
 }

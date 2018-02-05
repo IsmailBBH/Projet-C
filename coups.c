@@ -5,6 +5,8 @@
 
 #include "coups.h"
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int dans(int *t, int x, int y, int n) // elle teste si les dimentions du pions existent dans le tableau t. n : nombre de décalage du tableau
 {
 	int i = n;
@@ -18,6 +20,8 @@ int dans(int *t, int x, int y, int n) // elle teste si les dimentions du pions e
 	return 0;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int boutons(int x, int y) // teste si le joueur appuye sur un bouton
 {
 	if (x >= 920 && x <= 1121 && y >= 600 && y <= 650)
@@ -28,6 +32,8 @@ int boutons(int x, int y) // teste si le joueur appuye sur un bouton
 		return 3;
 	return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver, int *bouton) // jouer le tour d'un joueur
 {
@@ -46,6 +52,16 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 		MLV_clear_window(MLV_COLOR_BLACK);
 		actualiser(d, p1, p2, p3, p4 ,fond, police, retour, sauver);
 		analyser_damier(d, t, *jr);
+		
+		if (t[0] == 0)
+		{
+			if (jr == J1)
+				d[8][1] = 0;
+			else
+				d[8][2] = 0;
+			return;
+		}
+		
 		affiche_pions(t);
 		MLV_actualise_window();
 		
@@ -130,7 +146,9 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 									pion = p3;
 								else if (d[y][x] == 4)
 									pion = p4;
-									
+								
+								actualiser(d, p1, p2, p3, p4 ,fond, police, retour, sauver);
+								
 								joue2 = 1;
 							}
 						}
@@ -158,6 +176,8 @@ void jouer_tour(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void jouer_cpu(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3, MLV_Image *p4, MLV_Image *fond, MLV_Font *police, MLV_Image *retour, MLV_Image *sauver) // jouer le tour de l'ordinateur
 {
 	int x, y, n, m;
@@ -170,6 +190,15 @@ void jouer_cpu(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3
 	t[0] = 0;
 	
 	analyser_damier(d, t, *jr); // on analyse les le damier
+	
+	if (t[0] == 0)
+	{
+		if (jr == J1)
+			d[8][1] = 0;
+		else
+			d[8][2] = 0;
+		return;
+	}
 	
 	srand(time(NULL));
 	
@@ -239,6 +268,8 @@ void jouer_cpu(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3
 		
 		if (d[x][y] == 4)
 			pion = p4;
+			
+		actualiser(d, p1, p2, p3, p4 ,fond, police, retour, sauver);
 	
 		cherche_poss(mouvements, prises, d, *jr, m, n);
 	
@@ -264,6 +295,8 @@ void jouer_cpu(damier d, joueur *jr, MLV_Image *p1, MLV_Image *p2, MLV_Image *p3
 			
 			if (d[m][n] == 4)
 				pion = p4;
+				
+			actualiser(d, p1, p2, p3, p4 ,fond, police, retour, sauver);
 				
 			m = x;
 			n = y;

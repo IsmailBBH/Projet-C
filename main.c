@@ -75,6 +75,11 @@ int main()
 				else if (bouton == 1) // si le joueur a appuyer su le bouton sauvegarder
 				{
 					sauvegarder_2jr(d, jr);
+					MLV_draw_text_with_font(880, 400, "La partie a été bien sauvegardée !", font, MLV_COLOR_WHITE);
+					MLV_actualise_window();
+					MLV_wait_seconds(1);
+					actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
+					MLV_actualise_window();
 				}
 				
 				if (d[8][1] == 1 && d[8][2] == 1) // si il rest qu'un seul pion
@@ -222,11 +227,16 @@ int main()
 				else if (bouton == 1) // si le joueur a appuyer su le bouton sauvegarder
 				{
 					sauvegarder_cpu(d, jr);
+					MLV_draw_text_with_font(880, 400, "La partie a été bien sauvegardée !", font, MLV_COLOR_WHITE);
+					MLV_actualise_window();
+					MLV_wait_seconds(1);
+					actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
+					MLV_actualise_window();
 					while (bouton != 3 && bouton != 2)
 						jouer_tour(d, &jr, p1, p2, p3, p4, fond, police, retour, sauver, &bouton);
 				}
 				
-				if (bouton == 0||bouton == 3)
+				if ((bouton == 0 || bouton == 3) && d[8][2] != 0)
 					jouer_cpu(d, &jr, p1, p2, p3, p4, fond, police, retour, sauver);
 				
 				if (d[8][1] == 1 && d[8][2] == 1) // si il rest qu'un seul pion
@@ -307,7 +317,7 @@ int main()
 				else
 				{
 					actualiser(d, p1, p2, p3, p4, fond, police, retour, sauver);
-					MLV_draw_text_with_font(930, 360, "Le joueur 1 a gagné!", font, MLV_COLOR_WHITE);
+					MLV_draw_text_with_font(930, 360, "Vous avez gagné!", font, MLV_COLOR_WHITE);
 					MLV_actualise_window();
 					MLV_wait_seconds(1);
 					meilleur_score(d[8][3], font, oui, non, &m, d, p1, p2, p3, p4, fond, police, retour, sauver);

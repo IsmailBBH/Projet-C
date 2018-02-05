@@ -9,9 +9,9 @@
 /* types.h : l'ensemble des types utilisés dans le jeu */
 
 
-typedef int tab2[10][2];
+typedef int tab2[10][2]; // tableau de 2 dimensions 
 
-typedef char string[10][50];
+typedef char string[10][50]; // tableau des chaines de caractères
 
 typedef int damier[9][8];
 
